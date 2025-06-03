@@ -235,6 +235,7 @@ export function useGameLogic() {
         break;
       case 'nextLevel':
         nextLevel();
+        setGameState(prev => ({ ...prev, currentScene: 'game' }));
         break;
       case 'restart':
         setGameState(initialGameState);
