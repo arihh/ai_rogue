@@ -21,7 +21,7 @@ const initialGameState: GameState = {
   dungeon: [],
   dungeonLevel: 1,
   score: 0,
-  gameMessage: 'Welcome to Agentダンジョン!'
+  gameMessage: 'Agentダンジョンへようこそ！'
 };
 
 export function useGameLogic() {
@@ -48,7 +48,7 @@ export function useGameLogic() {
       dungeon,
       dungeonLevel: 1,
       score: 0,
-      gameMessage: 'Explore the dungeon!'
+      gameMessage: 'ダンジョンを探索しよう！'
     });
   }, []);
 
@@ -60,7 +60,7 @@ export function useGameLogic() {
     if (validPositions.length === 0) {
       setGameState(prev => ({ 
         ...prev, 
-        gameMessage: 'Error: Could not generate next level!' 
+        gameMessage: 'エラー：次のレベルを生成できませんでした！' 
       }));
       return;
     }
@@ -80,7 +80,7 @@ export function useGameLogic() {
       items,
       dungeon,
       dungeonLevel: nextLevelNum,
-      gameMessage: `Level ${nextLevelNum}! Your health has been restored.`
+      gameMessage: `レベル${nextLevelNum}！体力が回復しました。`
     }));
   }, [gameState.dungeonLevel]);
 
@@ -89,7 +89,7 @@ export function useGameLogic() {
       const newPosition = getNewPosition(prev.player.position, direction);
       
       if (!isValidMove(prev.dungeon, newPosition)) {
-        return { ...prev, gameMessage: 'Cannot move there!' };
+        return { ...prev, gameMessage: 'そこには移動できません！' };
       }
 
       // Check for enemy collision
@@ -98,7 +98,7 @@ export function useGameLogic() {
       );
 
       if (enemyAtPosition) {
-        return { ...prev, gameMessage: 'There\'s an enemy in the way!' };
+        return { ...prev, gameMessage: '敵がいて通れません！' };
       }
 
       // Check if reaching goal
@@ -110,7 +110,7 @@ export function useGameLogic() {
           player: { ...prev.player, position: newPosition },
           score: prev.score + bonusScore,
           currentScene: 'victory',
-          gameMessage: `Level ${prev.dungeonLevel} completed! +${bonusScore} points!`
+          gameMessage: `レベル${prev.dungeonLevel}クリア！+${bonusScore}点！`
         };
       }
 
@@ -130,15 +130,15 @@ export function useGameLogic() {
         switch (itemAtPosition.type) {
           case 'health':
             newPlayer.health = Math.min(newPlayer.health + itemAtPosition.value, newPlayer.maxHealth);
-            message = `Gained ${itemAtPosition.value} health!`;
+            message = `体力が${itemAtPosition.value}回復！`;
             break;
           case 'weapon':
             newPlayer.attack += itemAtPosition.value;
-            message = `Attack increased by ${itemAtPosition.value}!`;
+            message = `攻撃力が${itemAtPosition.value}上昇！`;
             break;
           case 'treasure':
             newScore += itemAtPosition.value;
-            message = `Found treasure! +${itemAtPosition.value} points!`;
+            message = `宝を発見！+${itemAtPosition.value}点！`;
             break;
         }
       }
@@ -148,7 +148,7 @@ export function useGameLogic() {
         player: newPlayer,
         items: newItems,
         score: newScore,
-        gameMessage: message || 'Moved successfully.'
+        gameMessage: message || '移動しました。'
       };
     });
   }, []);
@@ -161,21 +161,21 @@ export function useGameLogic() {
       );
 
       if (!enemyToAttack) {
-        return { ...prev, gameMessage: 'No enemy to attack in that direction!' };
+        return { ...prev, gameMessage: 'その方向に攻撃できる敵がいません！' };
       }
 
       const newEnemyHealth = enemyToAttack.health - prev.player.attack;
       let newEnemies = prev.enemies;
       let newScore = prev.score;
       const newPlayer = { ...prev.player };
-      let message = `Attacked ${enemyToAttack.name} for ${prev.player.attack} damage!`;
+      let message = `${enemyToAttack.name}に${prev.player.attack}ダメージを与えた！`;
 
       if (newEnemyHealth <= 0) {
         // Enemy defeated
         newEnemies = prev.enemies.filter(enemy => enemy.id !== enemyToAttack.id);
         newScore += enemyToAttack.reward;
         newPlayer.experience += enemyToAttack.reward;
-        message = `Defeated ${enemyToAttack.name}! +${enemyToAttack.reward} points!`;
+        message = `${enemyToAttack.name}を倒した！+${enemyToAttack.reward}点！`;
 
         // Level up check
         const expRequired = newPlayer.level * 50;
@@ -185,7 +185,7 @@ export function useGameLogic() {
           newPlayer.health = newPlayer.maxHealth;
           newPlayer.attack += 1;
           newPlayer.experience -= expRequired;
-          message += ` Level up! Now level ${newPlayer.level}!`;
+          message += ` レベルアップ！現在レベル${newPlayer.level}！`;
         }
       } else {
         // Update enemy health
@@ -199,14 +199,14 @@ export function useGameLogic() {
       // Enemy counter-attack
       if (newEnemyHealth > 0) {
         newPlayer.health -= enemyToAttack.attack;
-        message += ` ${enemyToAttack.name} attacks back for ${enemyToAttack.attack} damage!`;
+        message += ` ${enemyToAttack.name}の反撃！${enemyToAttack.attack}ダメージ！`;
 
         if (newPlayer.health <= 0) {
           return {
             ...prev,
             player: newPlayer,
             currentScene: 'gameOver',
-            gameMessage: 'You have been defeated!'
+            gameMessage: 'あなたは倒れてしまった！'
           };
         }
       }

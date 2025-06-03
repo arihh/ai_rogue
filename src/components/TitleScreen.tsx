@@ -13,22 +13,22 @@ export function TitleScreen({ onStartGame }: TitleScreenProps) {
           Agentダンジョン
         </h1>
         <p className="game-subtitle">
-          Fantasy Roguelike Adventure
+          ファンタジーローグライクアドベンチャー
         </p>
         <div className="title-description">
-          <p>🏰 Explore randomly generated dungeons</p>
-          <p>⚔️ Fight monsters and collect treasures</p>
-          <p>🎯 Reach the goal to advance levels</p>
+          <p>🏰 ランダム生成されたダンジョンを探索</p>
+          <p>⚔️ モンスターと戦い、宝を集める</p>
+          <p>🎯 ゴールに到達してレベルを進める</p>
         </div>
         <button 
           className="start-button"
           onClick={onStartGame}
         >
-          🚀 Start Adventure
+          🚀 冒険を始める
         </button>
         <div className="controls-info">
-          <h3>📱 Touch Controls</h3>
-          <p>Use directional buttons to move and attack</p>
+          <h3>📱 タッチ操作</h3>
+          <p>方向ボタンで移動・攻撃します</p>
         </div>
       </div>
     </div>
