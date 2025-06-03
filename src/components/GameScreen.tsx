@@ -36,13 +36,13 @@ export function GameScreen({ gameState, onMove, onAttack, onNextLevel }: GameScr
       {gameState.currentScene === 'victory' && (
         <div className="victory-overlay">
           <div className="victory-content">
-            <h2>🎉 Level Complete!</h2>
-            <p>Score: {gameState.score}</p>
+            <h2>🎉 レベルクリア！</h2>
+            <p>スコア: {gameState.score}</p>
             <button 
               className="next-level-button"
               onClick={onNextLevel}
             >
-              ⬆️ Next Level
+              ⬆️ 次のレベルへ
             </button>
           </div>
         </div>

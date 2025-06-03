@@ -27,13 +27,13 @@ export function TouchControls({ onMove, onAttack }: TouchControlsProps) {
           className={`mode-button ${!isAttackMode ? 'active' : ''}`}
           onClick={() => setIsAttackMode(false)}
         >
-          🚶 Move
+          🚶 移動
         </button>
         <button 
           className={`mode-button ${isAttackMode ? 'active' : ''}`}
           onClick={() => setIsAttackMode(true)}
         >
-          ⚔️ Attack
+          ⚔️ 攻撃
         </button>
       </div>
       
