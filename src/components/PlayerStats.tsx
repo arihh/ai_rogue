@@ -22,7 +22,7 @@ export function PlayerStats({ player, score, level }: PlayerStatsProps) {
         </div>
         
         <div className="stat-item">
-          <span className="stat-label">❤️ Health</span>
+          <span className="stat-label">❤️ 体力</span>
           <div className="health-bar">
             <div 
               className="health-fill"
@@ -35,7 +35,7 @@ export function PlayerStats({ player, score, level }: PlayerStatsProps) {
         </div>
         
         <div className="stat-item">
-          <span className="stat-label">⚔️ Attack</span>
+          <span className="stat-label">⚔️ 攻撃</span>
           <span className="stat-value">{player.attack}</span>
         </div>
         

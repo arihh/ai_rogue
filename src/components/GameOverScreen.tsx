@@ -12,23 +12,23 @@ export function GameOverScreen({ score, level, onRestart, onBackToTitle }: GameO
     <div className="game-over-screen">
       <div className="game-over-content">
         <h1 className="game-over-title">
-          💀 Game Over
+          💀 ゲームオーバー
         </h1>
         
         <div className="final-stats">
           <div className="stat-line">
             <span className="stat-icon">🏆</span>
-            <span className="stat-text">Final Score: {score.toLocaleString()}</span>
+            <span className="stat-text">最終スコア: {score.toLocaleString()}</span>
           </div>
           <div className="stat-line">
             <span className="stat-icon">🏰</span>
-            <span className="stat-text">Reached Floor: {level}</span>
+            <span className="stat-text">到達階層: {level}</span>
           </div>
         </div>
         
         <div className="game-over-message">
-          <p>Your adventure has come to an end!</p>
-          <p>But every ending is a new beginning...</p>
+          <p>冒険はここで終わりです！</p>
+          <p>しかし、終わりは新たな始まり…</p>
         </div>
         
         <div className="game-over-buttons">
@@ -36,13 +36,13 @@ export function GameOverScreen({ score, level, onRestart, onBackToTitle }: GameO
             className="restart-button"
             onClick={onRestart}
           >
-            🔄 Try Again
+            🔄 もう一度挑戦
           </button>
           <button 
             className="title-button"
             onClick={onBackToTitle}
           >
-            🏠 Main Menu
+            🏠 メインメニュー
           </button>
         </div>
       </div>
